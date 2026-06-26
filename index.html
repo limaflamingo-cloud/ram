@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>RAM - Rezeki Amanah Jaya Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="logo.png" type="image/png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  body { background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+
+  /* ===== LOGIN ===== */
+  #loginPage {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1a4731 0%, #2d5a3d 50%, #4a6b4f 100%);
+    padding: 20px;
+  }
+  .login-box {
+    background: white; padding: 35px; border-radius: 16px; width: 100%; max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.3);
+  }
+  .login-logo { text-align: center; margin-bottom: 15px; }
+  .login-logo img { 
+    max-width: 180px; 
+    height: auto;
+    background: transparent;
+  }
+  .login-box h1 { 
+    text-align: center; color: #1a4731; font-size: 32px; font-weight: 800; 
+    letter-spacing: 2px; margin-bottom: 2px; 
+  }
+  .login-box .brand-sub { text-align: center; color: #1a4731; font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+  .login-box .sub { text-align: center; color: #777; font-size: 12px; margin-bottom: 25px; }
+  .login-box input {
+    width: 100%; padding: 11px 14px; border: 1px solid #cbd5e0;
+    border-radius: 8px; font-size: 14px; margin-bottom: 12px;
+  }
+  .login-box input:focus { outline: none; border-color: #2d5a3d; }
+  .login-box .btn-login {
+    width: 100%; padding: 12px; background: #1a4731; color: white;
+    border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px;
+    transition: .2s;
+  }
+  .login-box .btn-login:hover { background: #2d5a3d; }
+  .login-box .toggle-link {
+    text-align: center; margin-top: 15px; font-size: 13px; color: #555;
+  }
+  .login-box .toggle-link a { color: #1a4731; font-weight: 600; cursor: pointer; }
+  .login-error {
+    background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 6px;
+    font-size: 13px; margin-bottom: 12px; display: none;
+  }
+
+  /* ===== APP ===== */
+  #appPage { display: none; }
+  header {
+    background: linear-gradient(135deg, #1a4731, #2d5a3d);
+    color: white; padding: 12px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-logo {
+    width: 50px; 
+    height: 50px;
+    background: transparent;
+    padding: 0;
+  }
+  .header-logo img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    background: transparent;
+  }
+  header .brand h1 { font-size: 22px; margin-bottom: 2px; font-weight: 800; letter-spacing: 1px; }
+  header .brand p { font-size: 11px; opacity: .9; }
+  .user-info { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .user-info .avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: white;
+    color: #1a4731; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .btn-logout {
+    padding: 6px 12px; background: rgba(255,255,255,.2); color: white;
+    border: 1px solid rgba(255,255,255,.4); border-radius: 6px; cursor: pointer; font-size: 12px;
+  }
+  .btn-logout:hover { background: rgba(255,255,255,.3); }
+
+  .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab {
+    padding: 10px 18px; background: white; border: none; border-radius: 8px;
+    cursor: pointer; font-weight: 600; color: #555; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    transition: .2s;
+  }
+  .tab:hover { background: #e8f5e9; }
+  .tab.active { background: #1a4731; color: white; }
+  .card {
+    background: white; padding: 20px; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 20px;
+  }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 12px; }
+  .stat {
+    background: linear-gradient(135deg,#2d5a3d,#4a6b4f); color: white;
+    padding: 18px; border-radius: 10px;
+  }
+  .stat h3 { font-size: 28px; }
+  .stat p { font-size: 13px; opacity: .95; }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: #333; }
+  input, select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid #cbd5e0;
+    border-radius: 6px; font-size: 14px;
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  .btn {
+    padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer;
+    font-weight: 600; font-size: 14px; transition: .2s;
+  }
+  .btn-primary { background: #1a4731; color: white; }
+  .btn-primary:hover { background: #2d5a3d; }
+  .btn-success { background: #38a169; color: white; }
+  .btn-danger { background: #e53e3e; color: white; }
+  .btn-warn { background: #dd6b20; color: white; }
+  .btn-info { background: #3182ce; color: white; }
+  .btn-sm { padding: 6px 10px; font-size: 12px; }
+  .btn-location { 
+    background: #0088cc; color: white; 
+    padding: 8px 12px; font-size: 12px; margin-top: 5px;
+  }
+  .btn-location:hover { background: #0077b5; }
+  .btn-location.loading { background: #999; cursor: not-allowed; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+  .filter-bar input, .filter-bar select { flex: 1; min-width: 150px; }
+  .client-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 15px; }
+  .client-card {
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08); transition: .2s;
+  }
+  .client-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+  .client-card img { width: 100%; height: 180px; object-fit: cover; background: #edf2f7; }
+  .client-info { padding: 12px; }
+  .client-info h3 { font-size: 16px; margin-bottom: 6px; color: #1a202c; }
+  .client-info p { font-size: 13px; color: #555; margin: 3px 0; }
+  .badge {
+    display: inline-block; padding: 3px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; margin-top: 6px;
+  }
+  .badge-prospek { background: #fef3c7; color: #92400e; }
+  .badge-deal { background: #dbeafe; color: #1e40af; }
+  .badge-aktif { background: #d1fae5; color: #065f46; }
+  .badge-selesai { background: #e5e7eb; color: #374151; }
+  .price { color: #1a4731; font-weight: 700; font-size: 15px; }
+  .empty { text-align: center; padding: 40px; color: #888; }
+  .modal-bg {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6);
+    z-index: 100; justify-content: center; align-items: center; padding: 20px;
+  }
+  .modal-bg.show { display: flex; }
+  .modal {
+    background: white; border-radius: 12px; padding: 20px;
+    max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto;
+  }
+  .toast {
+    position: fixed; bottom: 20px; right: 20px; padding: 12px 20px;
+    background: #1a4731; color: white; border-radius: 6px; z-index: 200;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2); display: none;
+  }
+  .toast.show { display: block; animation: slideIn .3s; }
+  @keyframes slideIn { from{transform:translateX(100%);opacity:0} to{transform:translateX(0);opacity:1} }
+  .photo-preview { max-width: 100%; max-height: 200px; border-radius: 6px; margin-top: 8px; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .sync-status { font-size: 12px; padding: 6px 10px; background: #e2e8f0; border-radius: 4px; display: inline-block; }
+  .loading { text-align: center; padding: 40px; color: #888; }
+  .created-by { font-size: 11px; color: #888; margin-top: 5px; font-style: italic; }
+  .app-footer {
+    text-align: center; padding: 20px; color: #888; font-size: 12px;
+    border-top: 1px solid #e2e8f0; margin-top: 30px;
+  }
+  .location-info {
+    background: #e8f5e9; padding: 10px; border-radius: 6px;
+    margin-top: 8px; font-size: 12px; display: none;
+  }
+  .location-info.show { display: block; }
+  .location-info a { color: #1a4731; font-weight: 600; }
+  .form-group { position: relative; }
+  .gps-indicator {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: #ccc; margin-left: 5px;
+  }
+  .gps-indicator.active { background: #48bb78; animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .telegram-status {
+    padding: 10px; border-radius: 6px; margin-top: 10px; font-size: 13px;
+  }
+  .telegram-status.connected { background: #d1fae5; color: #065f46; }
+  .telegram-status.disconnected { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN PAGE ===== -->
+<div id="loginPage">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="logo.png" alt="Logo RAM" onerror="this.style.display='none'">
+    </div>
+    <h1>RAM</h1>
+    <p class="brand-sub">Rezeki Amanah Jaya Management</p>
+    <p class="sub">CV REZEKI AMANAH JAYA Group<br>Supplier & Waste Solution Partner</p>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit" class="btn-login" id="loginBtn">🔐 Masuk</button>
+    </form>
+    <div class="toggle-link">
+      <span id="toggleText">Belum punya akun?</span>
+      <a onclick="toggleRegister()" id="toggleLink">Daftar di sini</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP PAGE ===== -->
+<div id="appPage">
+  <header>
+    <div class="header-left">
+      <div class="header-logo">
+        <img src="logo.png" alt="Logo RAM" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>RAM</h1>
+        <p>Rezeki Amanah Jaya Management</p>
+      </div>
+    </div>
+    <div class="user-info">
+      <div class="avatar" id="userAvatar">U</div>
+      <div>
+        <div id="userName" style="font-weight:600;">User</div>
+        <div id="userEmail" style="opacity:.85;font-size:11px;">email</div>
+      </div>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" onclick="showSection('dashboard', this)">📊 Dashboard</button>
+      <button class="tab" onclick="showSection('add', this)">➕ Tambah Client</button>
+      <button class="tab" onclick="showSection('list', this)">📋 Daftar Client</button>
+      <button class="tab" onclick="showSection('settings', this)">⚙️ Pengaturan</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active">
+      <div class="card">
+        <h2 style="margin-bottom:15px;">📊 Statistik Client</h2>
+        <div class="stats" id="statsContainer"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">🕐 Client Terbaru</h3>
+        <div id="recentClients"></div>
+      </div>
+    </div>
+
+    <!-- FORM TAMBAH -->
+    <div id="add" class="section">
+      <div class="card">
+        <h2 style="margin-bottom:15px;" id="formTitle">➕ Tambah Client Baru</h2>
+        <form id="clientForm">
+          <input type="hidden" id="editId">
+          <div class="form-grid">
+            <div><label>Nama Client / Perusahaan *</label><input type="text" id="nama" required></div>
+            <div>
+              <label>Kategori Waste *</label>
+              <select id="kategori" required>
+                <option value="">-- Pilih --</option>
+                <option>Minyak Jelantah</option>
+                <option>Limbah Minyak</option>
+                <option>Limbah Organik</option>
+                <option>Minyak Goreng Bekas</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Alamat Lokasi * <span class="gps-indicator" id="gpsIndicator"></span></label>
+              <input type="text" id="lokasi" placeholder="Alamat lengkap" required>
+              <button type="button" class="btn btn-location" id="btnGetLocation" onclick="getLocation()">
+                📍 Ambil Lokasi GPS Saat Ini
+              </button>
+              <div class="location-info" id="locationInfo"></div>
+            </div>
+            <div><label>Link Google Maps</label><input type="url" id="maps" placeholder="https://maps.google.com/..." readonly></div>
+            <div><label>Harga (Rp/kg atau /liter) *</label><input type="text" id="harga" placeholder="8000/kg" required></div>
+            <div><label>Estimasi Volume</label><input type="text" id="volume" placeholder="100 liter/minggu"></div>
+            <div><label>Kontak (HP/WA)</label><input type="text" id="kontak" placeholder="08xxxxxxxxxx"></div>
+            <div>
+              <label>Status Kerja Sama</label>
+              <select id="status">
+                <option>Prospek</option><option>Deal</option><option>Aktif</option><option>Selesai</option>
+              </select>
+            </div>
+            <div><label>PIC</label><input type="text" id="pic"></div>
+            <div><label>Tanggal Survey</label><input type="date" id="tanggal"></div>
+          </div>
+          <div style="margin-top:12px;"><label>Catatan</label><textarea id="catatan"></textarea></div>
+          <div style="margin-top:12px;">
+            <label>Foto Tempat</label>
+            <input type="file" id="foto" accept="image/*" onchange="previewFoto(event)">
+            <img id="fotoPreview" class="photo-preview" style="display:none;">
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">💾 Simpan & Kirim Notifikasi</button>
+            <button type="button" class="btn btn-warn" onclick="resetForm()">🔄 Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div id="list" class="section">
+      <div class="card">
+        <div class="filter-bar">
+          <input type="text" id="searchInput" placeholder="🔍 Cari nama / lokasi...">
+          <select id="filterStatus">
+            <option value="">Semua Status</option>
+            <option>Prospek</option><option>Deal</option><option>Aktif</option><option>Selesai</option>
+          </select>
+          <select id="filterKategori">
+            <option value="">Semua Kategori</option>
+            <option>Minyak Jelantah</option><option>Limbah Minyak</option>
+            <option>Limbah Organik</option><option>Minyak Goreng Bekas</option><option>Lainnya</option>
+          </select>
+          <button class="btn btn-info btn-sm" onclick="exportCSV()">📥 Export CSV</button>
+        </div>
+        <div id="clientGrid" class="client-grid"><p class="loading">Memuat data...</p></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings" class="section">
+      <div class="card">
+        <h2 style="margin-bottom:15px;">⚙️ Pengaturan Telegram</h2>
+        <p style="margin-bottom:15px; color:#555; font-size:13px;">
+          Notifikasi Telegram sudah dikonfigurasi. Laporan otomatis terkirim saat ada client baru.
+        </p>
+        <div id="telegramStatus" class="telegram-status connected">
+          ✅ Telegram terhubung dan siap mengirim notifikasi
+        </div>
+        <div class="form-grid" style="margin-top:15px;">
+          <div>
+            <label>Telegram Bot Token</label>
+            <input type="text" id="telegramToken" placeholder="Token bot" readonly style="background:#f7fafc;">
+          </div>
+          <div>
+            <label>Chat ID / Group ID</label>
+            <input type="text" id="telegramChatId" placeholder="Chat ID" readonly style="background:#f7fafc;">
+          </div>
+        </div>
+        <div class="actions" style="margin-top:15px;">
+          <button class="btn btn-success" onclick="testTelegram()">📤 Test Kirim Notifikasi</button>
+          <button class="btn btn-warn" onclick="clearTelegramConfig()">🗑️ Hapus Konfigurasi</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-bottom:15px;">🔄 Sinkronisasi Google Sheets (Backup)</h2>
+        <div style="margin-bottom:15px;">
+          <label>URL Web App Google Apps Script</label>
+          <input type="url" id="scriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="saveScriptUrl()">💾 Simpan URL</button>
+          <button class="btn btn-success" onclick="pushToSheets()">⬆️ Upload ke Sheets</button>
+        </div>
+        <div style="margin-top:15px;"><span class="sync-status" id="syncStatus">Status: Belum terhubung</span></div>
+      </div>
+    </div>
+
+    <div class="app-footer">
+      © 2026 <b>RAM (Rezeki Amanah Jaya Management)</b><br>
+      CV Rezeki Amanah Jaya Group • Supplier & Waste Solution Partner
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detail -->
+<div class="modal-bg" id="modalDetail">
+  <div class="modal">
+    <div id="modalContent"></div>
+    <div class="actions" style="margin-top:15px;">
+      <button class="btn btn-warn btn-sm" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ===== FIREBASE SDK ===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore, collection, doc, addDoc, updateDoc, deleteDoc,
+  onSnapshot, query, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ✅ FIREBASE CONFIGURATION
+const firebaseConfig = {
+  apiKey: "AIzaSyA0RswzqLjgLFaBX5Nq0wZxZz2bHOgpK1M",
+  authDomain: "ramgt-68fb9.firebaseapp.com",
+  projectId: "ramgt-68fb9",
+  storageBucket: "ramgt-68fb9.firebasestorage.app",
+  messagingSenderId: "187762663033",
+  appId: "1:187762663033:web:a618dfe67b79caa9f9bea8",
+  measurementId: "G-4LLRPZD49T"
+};
+
+// ✅ TELEGRAM CONFIGURATION (Pre-configured)
+const DEFAULT_TELEGRAM_TOKEN = "8904904364:AAG-r5_TnLLxlrCIFvoJYWGn6GE_6Qoqekc";
+const DEFAULT_TELEGRAM_CHAT_ID = "-5492008677";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let clients = [];
+let isRegisterMode = false;
+let currentLocation = null;
+
+// ===== AUTO-CONFIGURE TELEGRAM =====
+function autoConfigureTelegram() {
+  const savedToken = localStorage.getItem('telegramToken');
+  const savedChatId = localStorage.getItem('telegramChatId');
+  
+  if (!savedToken || !savedChatId) {
+    localStorage.setItem('telegramToken', DEFAULT_TELEGRAM_TOKEN);
+    localStorage.setItem('telegramChatId', DEFAULT_TELEGRAM_CHAT_ID);
+    console.log('✅ Telegram auto-configured');
+  }
+}
+
+autoConfigureTelegram();
+
+// ===== GPS LOCATION =====
+window.getLocation = function() {
+  const btn = document.getElementById('btnGetLocation');
+  const indicator = document.getElementById('gpsIndicator');
+  const info = document.getElementById('locationInfo');
+  
+  if (!navigator.geolocation) {
+    showToast('❌ Browser tidak support GPS');
+    return;
+  }
+  
+  btn.classList.add('loading');
+  btn.textContent = '📍 Mencari lokasi...';
+  indicator.classList.add('active');
+  
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+      
+      currentLocation = { lat, lng, accuracy };
+      
+      const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+      document.getElementById('maps').value = mapsUrl;
+      
+      let address = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+        const data = await response.json();
+        if (data.display_name) {
+          address = data.display_name.split(',')[0] + ', ' + (data.address.city || data.address.town || '');
+          document.getElementById('lokasi').value = address;
+        }
+      } catch (e) {
+        console.log('Reverse geocoding failed:', e);
+      }
+      
+      info.innerHTML = `
+        ✅ Lokasi berhasil!<br>
+        📍 Koordinat: ${lat.toFixed(6)}, ${lng.toFixed(6)}<br>
+        📏 Akurasi: ±${Math.round(accuracy)} meter<br>
+        🔗 <a href="${mapsUrl}" target="_blank">Lihat di Google Maps</a>
+      `;
+      info.classList.add('show');
+      
+      btn.classList.remove('loading');
+      btn.textContent = '🔄 Update Lokasi';
+      indicator.classList.remove('active');
+      
+      showToast('✅ Lokasi GPS berhasil diambil');
+    },
+    (error) => {
+      btn.classList.remove('loading');
+      btn.textContent = '📍 Ambil Lokasi GPS Saat Ini';
+      indicator.classList.remove('active');
+      
+      let errorMsg = 'Gagal mengambil lokasi';
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          errorMsg = 'Izin lokasi ditolak. Aktifkan di pengaturan browser';
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMsg = 'Informasi lokasi tidak tersedia';
+          break;
+        case error.TIMEOUT:
+          errorMsg = 'Request lokasi timeout';
+          break;
+      }
+      
+      showToast('❌ ' + errorMsg);
+      info.innerHTML = `❌ ${errorMsg}`;
+      info.classList.add('show');
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+};
+
+// ===== TELEGRAM NOTIFICATION =====
+async function sendTelegramNotification(clientData) {
+  const token = localStorage.getItem('telegramToken');
+  const chatId = localStorage.getItem('telegramChatId');
+  
+  if (!token || !chatId) {
+    console.warn('Telegram not configured');
+    return false;
+  }
+  
+  const message = `
+📋 *CLIENT BARU - RAM*
+
+👤 *Nama:* ${clientData.nama}
+🏭 *Perusahaan:* ${clientData.nama}
+🗑️ *Kategori:* ${clientData.kategori}
+📍 *Lokasi:* ${clientData.lokasi}
+💰 *Harga:* ${clientData.harga}
+📦 *Volume:* ${clientData.volume || '-'}
+📱 *Kontak:* ${clientData.kontak || '-'}
+👨‍ *PIC:* ${clientData.pic || '-'}
+📊 *Status:* ${clientData.status}
+📅 *Tanggal:* ${clientData.tanggal || new Date().toISOString().split('T')[0]}
+
+📝 *Catatan:*
+${clientData.catatan || '-'}
+
+👤 *Ditambahkan oleh:* ${clientData.createdByName}
+
+🔗 *Lokasi di Maps:* ${clientData.maps || 'Tidak ada'}
+  `.trim();
+  
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    });
+    
+    const data = await response.json();
+    return data.ok;
+  } catch (e) {
+    console.error('Telegram error:', e);
+    return false;
+  }
+}
+
+window.testTelegram = async function() {
+  const token = localStorage.getItem('telegramToken');
+  const chatId = localStorage.getItem('telegramChatId');
+  
+  if (!token || !chatId) {
+    showToast('❌ Telegram belum dikonfigurasi');
+    return;
+  }
+  
+  showToast('📤 Mengirim test...');
+  
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: '✅ *Test Berhasil!*\n\n🎉 Notifikasi dari *RAM App* berfungsi dengan baik.\n\n_Sistem siap digunakan._',
+        parse_mode: 'Markdown'
+      })
+    });
+    
+    const data = await response.json();
+    if (data.ok) {
+      showToast('✅ Test berhasil! Cek Telegram Anda');
+    } else {
+      showToast('❌ Gagal: ' + data.description);
+    }
+  } catch (e) {
+    showToast('❌ Error: ' + e.message);
+  }
+};
+
+window.clearTelegramConfig = function() {
+  if (confirm('Yakin ingin menghapus konfigurasi Telegram?')) {
+    localStorage.removeItem('telegramToken');
+    localStorage.removeItem('telegramChatId');
+    showToast('🗑️ Konfigurasi Telegram dihapus');
+    loadSettings();
+  }
+};
+
+// ===== AUTH =====
+window.toggleRegister = function() {
+  isRegisterMode = !isRegisterMode;
+  document.getElementById('loginBtn').textContent = isRegisterMode ? '📝 Daftar' : '🔐 Masuk';
+  document.getElementById('toggleText').textContent = isRegisterMode ? 'Sudah punya akun?' : 'Belum punya akun?';
+  document.getElementById('toggleLink').textContent = isRegisterMode ? 'Login di sini' : 'Daftar di sini';
+  document.getElementById('loginError').style.display = 'none';
+};
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Memproses...';
+  try {
+    if (isRegisterMode) {
+      await createUserWithEmailAndPassword(auth, email, password);
+      showToast('✅ Registrasi berhasil! Silakan login.');
+      toggleRegister();
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch (err) {
+    errEl.textContent = translateError(err.code);
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = isRegisterMode ? '📝 Daftar' : '🔐 Masuk';
+  }
+});
+
+function translateError(code) {
+  const map = {
+    'auth/invalid-email': 'Format email tidak valid',
+    'auth/user-not-found': 'Email tidak terdaftar',
+    'auth/wrong-password': 'Password salah',
+    'auth/invalid-credential': 'Email atau password salah',
+    'auth/email-already-in-use': 'Email sudah terdaftar',
+    'auth/weak-password': 'Password minimal 6 karakter',
+    'auth/too-many-requests': 'Terlalu banyak percobaan, coba lagi nanti',
+    'auth/network-request-failed': 'Gagal koneksi, periksa internet'
+  };
+  return map[code] || 'Terjadi kesalahan: ' + code;
+}
+
+window.logout = async function() {
+  if (!confirm('Yakin ingin logout?')) return;
+  await signOut(auth);
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('appPage').style.display = 'block';
+    document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
+    document.getElementById('userEmail').textContent = user.email;
+    document.getElementById('userAvatar').textContent = (user.email[0] || 'U').toUpperCase();
+    loadClients();
+    loadSettings();
+  } else {
+    currentUser = null;
+    document.getElementById('loginPage').style.display = 'flex';
+    document.getElementById('appPage').style.display = 'none';
+    clients = [];
+  }
+});
+
+// ===== FIRESTORE =====
+function loadClients() {
+  const q = query(collection(db, 'clients'), orderBy('createdAt', 'desc'));
+  onSnapshot(q, (snapshot) => {
+    clients = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderAll();
+  }, (err) => {
+    console.error(err);
+    showToast('❌ Gagal memuat data: ' + err.message);
+  });
+}
+
+window.previewFoto = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 500 * 1024) {
+    showToast('⚠️ Foto terlalu besar (maks 500KB)');
+    e.target.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = document.getElementById('fotoPreview');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+};
+
+document.getElementById('clientForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!currentUser) return;
+  const editId = document.getElementById('editId').value;
+  const fotoPrev = document.getElementById('fotoPreview');
+  const data = {
+    nama: document.getElementById('nama').value,
+    kategori: document.getElementById('kategori').value,
+    lokasi: document.getElementById('lokasi').value,
+    maps: document.getElementById('maps').value,
+    harga: document.getElementById('harga').value,
+    volume: document.getElementById('volume').value,
+    kontak: document.getElementById('kontak').value,
+    status: document.getElementById('status').value,
+    pic: document.getElementById('pic').value,
+    tanggal: document.getElementById('tanggal').value,
+    catatan: document.getElementById('catatan').value,
+    foto: fotoPrev.style.display !== 'none' ? fotoPrev.src : '',
+    createdBy: currentUser.email,
+    createdByName: currentUser.displayName || currentUser.email.split('@')[0],
+    updatedAt: serverTimestamp()
+  };
+
+  try {
+    if (editId) {
+      await updateDoc(doc(db, 'clients', editId), data);
+      showToast('✅ Data diupdate');
+    } else {
+      data.createdAt = serverTimestamp();
+      const docRef = await addDoc(collection(db, 'clients'), data);
+      showToast('✅ Client ditambahkan');
+      
+      const sent = await sendTelegramNotification({ ...data, id: docRef.id });
+      if (sent) {
+        showToast('📤 Notifikasi Telegram terkirim');
+      } else {
+        showToast('⚠️ Client tersimpan, tapi gagal kirim Telegram');
+      }
+    }
+    resetForm();
+    showSection('list', document.querySelectorAll('.tab')[2]);
+  } catch (err) {
+    showToast('❌ Gagal: ' + err.message);
+  }
+});
+
+window.resetForm = function() {
+  document.getElementById('clientForm').reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('fotoPreview').style.display = 'none';
+  document.getElementById('formTitle').textContent = '➕ Tambah Client Baru';
+  document.getElementById('locationInfo').classList.remove('show');
+  document.getElementById('btnGetLocation').textContent = '📍 Ambil Lokasi GPS Saat Ini';
+  currentLocation = null;
+};
+
+window.editClient = function(id) {
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('editId').value = c.id;
+  document.getElementById('nama').value = c.nama || '';
+  document.getElementById('kategori').value = c.kategori || '';
+  document.getElementById('lokasi').value = c.lokasi || '';
+  document.getElementById('maps').value = c.maps || '';
+  document.getElementById('harga').value = c.harga || '';
+  document.getElementById('volume').value = c.volume || '';
+  document.getElementById('kontak').value = c.kontak || '';
+  document.getElementById('status').value = c.status || 'Prospek';
+  document.getElementById('pic').value = c.pic || '';
+  document.getElementById('tanggal').value = c.tanggal || '';
+  document.getElementById('catatan').value = c.catatan || '';
+  if (c.foto) {
+    const img = document.getElementById('fotoPreview');
+    img.src = c.foto; img.style.display = 'block';
+  }
+  document.getElementById('formTitle').textContent = '✏️ Edit Client';
+  showSection('add', document.querySelectorAll('.tab')[1]);
+};
+
+window.deleteClient = async function(id) {
+  if (!confirm('Yakin hapus client ini?')) return;
+  try {
+    await deleteDoc(doc(db, 'clients', id));
+    showToast('🗑️ Client dihapus');
+  } catch (err) {
+    showToast('❌ Gagal hapus: ' + err.message);
+  }
+};
+
+window.showDetail = function(id) {
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+  const html = `
+    ${c.foto ? `<img src="${c.foto}" style="width:100%;border-radius:8px;margin-bottom:10px;">` : ''}
+    <h2>${c.nama}</h2>
+    <span class="badge badge-${(c.status||'prospek').toLowerCase()}">${c.status}</span>
+    <p style="margin-top:10px;"><b>Kategori:</b> ${c.kategori}</p>
+    <p><b>Lokasi:</b> ${c.lokasi}</p>
+    ${c.maps ? `<p><a href="${c.maps}" target="_blank">📍 Buka di Google Maps</a></p>` : ''}
+    <p class="price" style="font-size:18px;">💰 ${c.harga}</p>
+    <p><b>Volume:</b> ${c.volume || '-'}</p>
+    <p><b>Kontak:</b> ${c.kontak || '-'} ${c.kontak ? `<a href="https://wa.me/${c.kontak.replace(/\D/g,'')}" target="_blank">💬 WA</a>` : ''}</p>
+    <p><b>PIC:</b> ${c.pic || '-'}</p>
+    <p><b>Tanggal Survey:</b> ${c.tanggal || '-'}</p>
+    <p><b>Catatan:</b> ${c.catatan || '-'}</p>
+    <p class="created-by">Ditambahkan oleh: ${c.createdByName || c.createdBy || '-'}</p>
+  `;
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalDetail').classList.add('show');
+};
+
+window.closeModal = function() {
+  document.getElementById('modalDetail').classList.remove('show');
+};
+
+function renderAll() {
+  const active = document.querySelector('.section.active')?.id;
+  if (active === 'dashboard') renderDashboard();
+  if (active === 'list') renderList();
+}
+
+function renderDashboard() {
+  const total = clients.length;
+  const prospek = clients.filter(c => c.status === 'Prospek').length;
+  const deal = clients.filter(c => c.status === 'Deal').length;
+  const aktif = clients.filter(c => c.status === 'Aktif').length;
+  const selesai = clients.filter(c => c.status === 'Selesai').length;
+  document.getElementById('statsContainer').innerHTML = `
+    <div class="stat"><h3>${total}</h3><p>Total Client</p></div>
+    <div class="stat" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><h3>${prospek}</h3><p>Prospek</p></div>
+    <div class="stat" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);"><h3>${deal}</h3><p>Deal</p></div>
+    <div class="stat"><h3>${aktif}</h3><p>Aktif</p></div>
+    <div class="stat" style="background:linear-gradient(135deg,#6b7280,#9ca3af);"><h3>${selesai}</h3><p>Selesai</p></div>
+  `;
+  const recent = clients.slice(0, 5);
+  if (recent.length === 0) {
+    document.getElementById('recentClients').innerHTML = '<p class="empty">Belum ada data client</p>';
+  } else {
+    document.getElementById('recentClients').innerHTML = recent.map(c => `
+      <div style="padding:10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <b>${c.nama}</b><br>
+          <small style="color:#666;">${c.kategori} • ${c.lokasi}</small>
+        </div>
+        <span class="badge badge-${(c.status||'prospek').toLowerCase()}">${c.status}</span>
+      </div>
+    `).join('');
+  }
+}
+
+function renderList() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const fStatus = document.getElementById('filterStatus').value;
+  const fKat = document.getElementById('filterKategori').value;
+  let filtered = clients.filter(c => {
+    const matchSearch = !search || (c.nama||'').toLowerCase().includes(search) || (c.lokasi||'').toLowerCase().includes(search);
+    const matchStatus = !fStatus || c.status === fStatus;
+    const matchKat = !fKat || c.kategori === fKat;
+    return matchSearch && matchStatus && matchKat;
+  });
+  const grid = document.getElementById('clientGrid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p class="empty" style="grid-column:1/-1;">Tidak ada data client</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map(c => `
+    <div class="client-card">
+      ${c.foto ? `<img src="${c.foto}" onclick="showDetail('${c.id}')" style="cursor:pointer;">` :
+        `<div style="height:180px;background:#edf2f7;display:flex;align-items:center;justify-content:center;font-size:48px;cursor:pointer;" onclick="showDetail('${c.id}')">🛢️</div>`}
+      <div class="client-info">
+        <h3>${c.nama}</h3>
+        <p>📍 ${c.lokasi}</p>
+        <p>${c.maps ? `<a href="${c.maps}" target="_blank">Lihat Maps</a>` : ''}</p>
+        <p class="price">💰 ${c.harga}</p>
+        <p>📦 ${c.kategori}</p>
+        <p class="created-by">oleh: ${c.createdByName || '-'}</p>
+        <span class="badge badge-${(c.status||'prospek').toLowerCase()}">${c.status}</span>
+        <div class="actions">
+          <button class="btn btn-info btn-sm" onclick="showDetail('${c.id}')">👁️</button>
+          <button class="btn btn-warn btn-sm" onclick="editClient('${c.id}')">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteClient('${c.id}')">🗑️</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+['searchInput','filterStatus','filterKategori'].forEach(id => {
+  document.getElementById(id).addEventListener('input', renderList);
+  document.getElementById(id).addEventListener('change', renderList);
+});
+
+window.showSection = function(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'list') renderList();
+  if (id === 'settings') loadSettings();
+};
+
+function loadSettings() {
+  const token = localStorage.getItem('telegramToken') || '';
+  const chatId = localStorage.getItem('telegramChatId') || '';
+  
+  document.getElementById('telegramToken').value = token ? token.substring(0, 20) + '...' : '';
+  document.getElementById('telegramChatId').value = chatId;
+  document.getElementById('scriptUrl').value = localStorage.getItem('scriptUrl') || '';
+  
+  const statusEl = document.getElementById('telegramStatus');
+  if (token && chatId) {
+    statusEl.className = 'telegram-status connected';
+    statusEl.innerHTML = '✅ Telegram terhubung dan siap mengirim notifikasi';
+  } else {
+    statusEl.className = 'telegram-status disconnected';
+    statusEl.innerHTML = '❌ Telegram belum dikonfigurasi';
+  }
+  
+  updateSyncStatus();
+}
+
+window.exportCSV = function() {
+  if (clients.length === 0) { showToast('Tidak ada data'); return; }
+  const headers = ['Nama','Kategori','Lokasi','Maps','Harga','Volume','Kontak','Status','PIC','Tanggal','Catatan','Ditambahkan Oleh'];
+  const rows = clients.map(c => [c.nama,c.kategori,c.lokasi,c.maps,c.harga,c.volume,c.kontak,c.status,c.pic,c.tanggal,c.catatan,c.createdByName||c.createdBy]
+    .map(v => `"${(v||'').toString().replace(/"/g,'""')}"`).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `RAM_client_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  showToast('📥 CSV berhasil didownload');
+};
+
+window.saveScriptUrl = function() {
+  const url = document.getElementById('scriptUrl').value.trim();
+  localStorage.setItem('scriptUrl', url);
+  updateSyncStatus();
+  showToast('✅ URL tersimpan');
+};
+
+function updateSyncStatus() {
+  const el = document.getElementById('syncStatus');
+  const url = localStorage.getItem('scriptUrl');
+  if (url) {
+    el.textContent = 'Status: ✅ Terhubung';
+    el.style.background = '#d1fae5'; el.style.color = '#065f46';
+  } else {
+    el.textContent = 'Status: ❌ Belum terhubung';
+    el.style.background = '#fee2e2'; el.style.color = '#991b1b';
+  }
+}
+
+window.pushToSheets = async function() {
+  const url = localStorage.getItem('scriptUrl');
+  if (!url) { showToast('❌ URL belum diisi'); return; }
+  if (clients.length === 0) { showToast('Tidak ada data'); return; }
+  try {
+    await fetch(url, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'push', data: clients})
+    });
+    showToast('⬆️ Data berhasil diupload ke Sheets');
+  } catch (e) {
+    showToast('❌ Gagal upload: ' + e.message);
+  }
+};
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+window.showToast = showToast;
+</script>
+</body>
+</html>
