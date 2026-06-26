@@ -9,7 +9,6 @@
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
   body { background: #f0f4f8; color: #1a202c; min-height: 100vh; }
 
-  /* ===== LOGIN ===== */
   #loginPage {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, #1a4731 0%, #2d5a3d 50%, #4a6b4f 100%);
@@ -20,11 +19,7 @@
     box-shadow: 0 10px 40px rgba(0,0,0,.3);
   }
   .login-logo { text-align: center; margin-bottom: 15px; }
-  .login-logo img { 
-    max-width: 180px; 
-    height: auto;
-    background: transparent;
-  }
+  .login-logo img { max-width: 180px; height: auto; background: transparent; }
   .login-box h1 { 
     text-align: center; color: #1a4731; font-size: 32px; font-weight: 800; 
     letter-spacing: 2px; margin-bottom: 2px; 
@@ -51,7 +46,6 @@
     font-size: 13px; margin-bottom: 12px; display: none;
   }
 
-  /* ===== APP ===== */
   #appPage { display: none; }
   header {
     background: linear-gradient(135deg, #1a4731, #2d5a3d);
@@ -59,25 +53,14 @@
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
   }
   .header-left { display: flex; align-items: center; gap: 12px; }
-  .header-logo {
-    width: 50px; 
-    height: 50px;
-    background: transparent;
-    padding: 0;
-  }
-  .header-logo img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain;
-    background: transparent;
-  }
+  .header-logo { width: 50px; height: 50px; background: transparent; padding: 0; }
+  .header-logo img { width: 100%; height: 100%; object-fit: contain; background: transparent; }
   header .brand h1 { font-size: 22px; margin-bottom: 2px; font-weight: 800; letter-spacing: 1px; }
   header .brand p { font-size: 11px; opacity: .9; }
   .user-info { display: flex; align-items: center; gap: 10px; font-size: 13px; }
   .user-info .avatar {
     width: 36px; height: 36px; border-radius: 50%; background: white;
-    color: #1a4731; display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
+    color: #1a4731; display: flex; align-items: center; justify-content: center; font-weight: 700;
   }
   .btn-logout {
     padding: 6px 12px; background: rgba(255,255,255,.2); color: white;
@@ -89,8 +72,7 @@
   .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
   .tab {
     padding: 10px 18px; background: white; border: none; border-radius: 8px;
-    cursor: pointer; font-weight: 600; color: #555; box-shadow: 0 1px 3px rgba(0,0,0,.08);
-    transition: .2s;
+    cursor: pointer; font-weight: 600; color: #555; box-shadow: 0 1px 3px rgba(0,0,0,.08); transition: .2s;
   }
   .tab:hover { background: #e8f5e9; }
   .tab.active { background: #1a4731; color: white; }
@@ -99,10 +81,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 20px;
   }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 12px; }
-  .stat {
-    background: linear-gradient(135deg,#2d5a3d,#4a6b4f); color: white;
-    padding: 18px; border-radius: 10px;
-  }
+  .stat { background: linear-gradient(135deg,#2d5a3d,#4a6b4f); color: white; padding: 18px; border-radius: 10px; }
   .stat h3 { font-size: 28px; }
   .stat p { font-size: 13px; opacity: .95; }
   .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; }
@@ -123,10 +102,7 @@
   .btn-warn { background: #dd6b20; color: white; }
   .btn-info { background: #3182ce; color: white; }
   .btn-sm { padding: 6px 10px; font-size: 12px; }
-  .btn-location { 
-    background: #0088cc; color: white; 
-    padding: 8px 12px; font-size: 12px; margin-top: 5px;
-  }
+  .btn-location { background: #0088cc; color: white; padding: 8px 12px; font-size: 12px; margin-top: 5px; }
   .btn-location:hover { background: #0077b5; }
   .btn-location.loading { background: #999; cursor: not-allowed; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
@@ -190,20 +166,25 @@
     border-radius: 50%; background: #ccc; margin-left: 5px;
   }
   .gps-indicator.active { background: #48bb78; animation: pulse 2s infinite; }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  .telegram-status {
-    padding: 10px; border-radius: 6px; margin-top: 10px; font-size: 13px;
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .telegram-status { padding: 10px; border-radius: 6px; margin-top: 10px; font-size: 13px; }
   .telegram-status.connected { background: #d1fae5; color: #065f46; }
   .telegram-status.disconnected { background: #fee2e2; color: #991b1b; }
+  .telegram-log {
+    background: #1a202c; color: #48bb78; padding: 10px; border-radius: 6px;
+    font-family: monospace; font-size: 12px; margin-top: 10px;
+    max-height: 200px; overflow-y: auto; display: none;
+  }
+  .telegram-log.show { display: block; }
+  .telegram-log .error { color: #fc8181; }
+  .telegram-log .info { color: #63b3ed; }
+  .maps-hint {
+    font-size: 11px; color: #777; margin-top: 4px; font-style: italic;
+  }
 </style>
 </head>
 <body>
 
-<!-- ===== LOGIN PAGE ===== -->
 <div id="loginPage">
   <div class="login-box">
     <div class="login-logo">
@@ -225,7 +206,6 @@
   </div>
 </div>
 
-<!-- ===== APP PAGE ===== -->
 <div id="appPage">
   <header>
     <div class="header-left">
@@ -249,13 +229,12 @@
 
   <div class="container">
     <div class="tabs">
-      <button class="tab active" onclick="showSection('dashboard', this)">📊 Dashboard</button>
-      <button class="tab" onclick="showSection('add', this)">➕ Tambah Client</button>
+      <button class="tab active" onclick="showSection('dashboard', this)"> Dashboard</button>
+      <button class="tab" onclick="showSection('add', this)"> Tambah Client</button>
       <button class="tab" onclick="showSection('list', this)">📋 Daftar Client</button>
       <button class="tab" onclick="showSection('settings', this)">⚙️ Pengaturan</button>
     </div>
 
-    <!-- DASHBOARD -->
     <div id="dashboard" class="section active">
       <div class="card">
         <h2 style="margin-bottom:15px;">📊 Statistik Client</h2>
@@ -267,7 +246,6 @@
       </div>
     </div>
 
-    <!-- FORM TAMBAH -->
     <div id="add" class="section">
       <div class="card">
         <h2 style="margin-bottom:15px;" id="formTitle">➕ Tambah Client Baru</h2>
@@ -290,11 +268,15 @@
               <label>Alamat Lokasi * <span class="gps-indicator" id="gpsIndicator"></span></label>
               <input type="text" id="lokasi" placeholder="Alamat lengkap" required>
               <button type="button" class="btn btn-location" id="btnGetLocation" onclick="getLocation()">
-                📍 Ambil Lokasi GPS Saat Ini
+                📍 Ambil Lokasi GPS
               </button>
               <div class="location-info" id="locationInfo"></div>
             </div>
-            <div><label>Link Google Maps</label><input type="url" id="maps" placeholder="https://maps.google.com/..." readonly></div>
+            <div class="form-group">
+              <label>Link Google Maps</label>
+              <input type="url" id="maps" placeholder="https://maps.google.com/... atau isi manual">
+              <div class="maps-hint">💡 Bisa diisi manual atau otomatis dari tombol GPS di atas</div>
+            </div>
             <div><label>Harga (Rp/kg atau /liter) *</label><input type="text" id="harga" placeholder="8000/kg" required></div>
             <div><label>Estimasi Volume</label><input type="text" id="volume" placeholder="100 liter/minggu"></div>
             <div><label>Kontak (HP/WA)</label><input type="text" id="kontak" placeholder="08xxxxxxxxxx"></div>
@@ -314,14 +296,13 @@
             <img id="fotoPreview" class="photo-preview" style="display:none;">
           </div>
           <div class="actions">
-            <button type="submit" class="btn btn-primary">💾 Simpan & Kirim Notifikasi</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit">💾 Simpan & Kirim Notifikasi</button>
             <button type="button" class="btn btn-warn" onclick="resetForm()">🔄 Reset</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- LIST -->
     <div id="list" class="section">
       <div class="card">
         <div class="filter-bar">
@@ -341,34 +322,35 @@
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div id="settings" class="section">
       <div class="card">
         <h2 style="margin-bottom:15px;">⚙️ Pengaturan Telegram</h2>
         <p style="margin-bottom:15px; color:#555; font-size:13px;">
-          Notifikasi Telegram sudah dikonfigurasi. Laporan otomatis terkirim saat ada client baru.
+          Konfigurasi notifikasi Telegram untuk menerima laporan otomatis.
         </p>
         <div id="telegramStatus" class="telegram-status connected">
-          ✅ Telegram terhubung dan siap mengirim notifikasi
+          ✅ Telegram terhubung
         </div>
         <div class="form-grid" style="margin-top:15px;">
           <div>
             <label>Telegram Bot Token</label>
-            <input type="text" id="telegramToken" placeholder="Token bot" readonly style="background:#f7fafc;">
+            <input type="text" id="telegramToken" readonly style="background:#f7fafc;">
           </div>
           <div>
             <label>Chat ID / Group ID</label>
-            <input type="text" id="telegramChatId" placeholder="Chat ID" readonly style="background:#f7fafc;">
+            <input type="text" id="telegramChatId" readonly style="background:#f7fafc;">
           </div>
         </div>
         <div class="actions" style="margin-top:15px;">
           <button class="btn btn-success" onclick="testTelegram()">📤 Test Kirim Notifikasi</button>
-          <button class="btn btn-warn" onclick="clearTelegramConfig()">🗑️ Hapus Konfigurasi</button>
+          <button class="btn btn-info" onclick="toggleTelegramLog()">📋 Lihat Log</button>
+          <button class="btn btn-warn" onclick="clearTelegramConfig()">️ Hapus Konfigurasi</button>
         </div>
+        <div class="telegram-log" id="telegramLog"></div>
       </div>
 
       <div class="card">
-        <h2 style="margin-bottom:15px;">🔄 Sinkronisasi Google Sheets (Backup)</h2>
+        <h2 style="margin-bottom:15px;"> Sinkronisasi Google Sheets (Backup)</h2>
         <div style="margin-bottom:15px;">
           <label>URL Web App Google Apps Script</label>
           <input type="url" id="scriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
@@ -388,7 +370,6 @@
   </div>
 </div>
 
-<!-- Modal Detail -->
 <div class="modal-bg" id="modalDetail">
   <div class="modal">
     <div id="modalContent"></div>
@@ -400,7 +381,6 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ===== FIREBASE SDK ===== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
@@ -412,7 +392,6 @@ import {
   onSnapshot, query, orderBy, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ✅ FIREBASE CONFIGURATION
 const firebaseConfig = {
   apiKey: "AIzaSyA0RswzqLjgLFaBX5Nq0wZxZz2bHOgpK1M",
   authDomain: "ramgt-68fb9.firebaseapp.com",
@@ -423,7 +402,6 @@ const firebaseConfig = {
   measurementId: "G-4LLRPZD49T"
 };
 
-// ✅ TELEGRAM CONFIGURATION (Pre-configured)
 const DEFAULT_TELEGRAM_TOKEN = "8904904364:AAG-r5_TnLLxlrCIFvoJYWGn6GE_6Qoqekc";
 const DEFAULT_TELEGRAM_CHAT_ID = "-5492008677";
 
@@ -435,20 +413,40 @@ let currentUser = null;
 let clients = [];
 let isRegisterMode = false;
 let currentLocation = null;
+let telegramLogEntries = [];
 
-// ===== AUTO-CONFIGURE TELEGRAM =====
 function autoConfigureTelegram() {
   const savedToken = localStorage.getItem('telegramToken');
   const savedChatId = localStorage.getItem('telegramChatId');
-  
   if (!savedToken || !savedChatId) {
     localStorage.setItem('telegramToken', DEFAULT_TELEGRAM_TOKEN);
     localStorage.setItem('telegramChatId', DEFAULT_TELEGRAM_CHAT_ID);
-    console.log('✅ Telegram auto-configured');
   }
 }
-
 autoConfigureTelegram();
+
+// ===== TELEGRAM LOG =====
+function addTelegramLog(msg, type = 'info') {
+  const time = new Date().toLocaleTimeString('id-ID');
+  telegramLogEntries.push({ time, msg, type });
+  if (telegramLogEntries.length > 50) telegramLogEntries.shift();
+  renderTelegramLog();
+  console.log(`[Telegram ${type}] ${msg}`);
+}
+
+function renderTelegramLog() {
+  const el = document.getElementById('telegramLog');
+  if (!el) return;
+  el.innerHTML = telegramLogEntries.map(e => 
+    `<div class="${e.type}">[${e.time}] ${e.msg}</div>`
+  ).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+window.toggleTelegramLog = function() {
+  const el = document.getElementById('telegramLog');
+  el.classList.toggle('show');
+};
 
 // ===== GPS LOCATION =====
 window.getLocation = function() {
@@ -473,15 +471,17 @@ window.getLocation = function() {
       
       currentLocation = { lat, lng, accuracy };
       
+      // Generate Google Maps link - otomatis isi ke field maps
       const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
       document.getElementById('maps').value = mapsUrl;
       
+      // Reverse geocoding
       let address = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
       try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
         const data = await response.json();
         if (data.display_name) {
-          address = data.display_name.split(',')[0] + ', ' + (data.address.city || data.address.town || '');
+          address = data.display_name;
           document.getElementById('lokasi').value = address;
         }
       } catch (e) {
@@ -492,79 +492,80 @@ window.getLocation = function() {
         ✅ Lokasi berhasil!<br>
         📍 Koordinat: ${lat.toFixed(6)}, ${lng.toFixed(6)}<br>
         📏 Akurasi: ±${Math.round(accuracy)} meter<br>
-        🔗 <a href="${mapsUrl}" target="_blank">Lihat di Google Maps</a>
+         <a href="${mapsUrl}" target="_blank">Lihat di Google Maps</a><br>
+        <small style="color:#666;"> Field Maps sudah terisi otomatis, bisa diedit manual jika perlu</small>
       `;
       info.classList.add('show');
       
       btn.classList.remove('loading');
-      btn.textContent = '🔄 Update Lokasi';
+      btn.textContent = ' Update Lokasi';
       indicator.classList.remove('active');
       
       showToast('✅ Lokasi GPS berhasil diambil');
     },
     (error) => {
       btn.classList.remove('loading');
-      btn.textContent = '📍 Ambil Lokasi GPS Saat Ini';
+      btn.textContent = ' Ambil Lokasi GPS';
       indicator.classList.remove('active');
       
       let errorMsg = 'Gagal mengambil lokasi';
       switch(error.code) {
-        case error.PERMISSION_DENIED:
-          errorMsg = 'Izin lokasi ditolak. Aktifkan di pengaturan browser';
-          break;
-        case error.POSITION_UNAVAILABLE:
-          errorMsg = 'Informasi lokasi tidak tersedia';
-          break;
-        case error.TIMEOUT:
-          errorMsg = 'Request lokasi timeout';
-          break;
+        case error.PERMISSION_DENIED: errorMsg = 'Izin lokasi ditolak'; break;
+        case error.POSITION_UNAVAILABLE: errorMsg = 'Lokasi tidak tersedia'; break;
+        case error.TIMEOUT: errorMsg = 'Request timeout'; break;
       }
       
       showToast('❌ ' + errorMsg);
       info.innerHTML = `❌ ${errorMsg}`;
       info.classList.add('show');
     },
-    {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    }
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
   );
 };
 
-// ===== TELEGRAM NOTIFICATION =====
-async function sendTelegramNotification(clientData) {
+// ===== TELEGRAM NOTIFICATION (FIXED) =====
+async function sendTelegramNotification(clientData, isEdit = false) {
   const token = localStorage.getItem('telegramToken');
   const chatId = localStorage.getItem('telegramChatId');
   
   if (!token || !chatId) {
-    console.warn('Telegram not configured');
+    addTelegramLog('Token/ChatID tidak ada', 'error');
     return false;
   }
   
-  const message = `
-📋 *CLIENT BARU - RAM*
+  const actionText = isEdit ? 'DIUPDATE' : 'BARU DITAMBAHKAN';
+  const actionIcon = isEdit ? '✏️' : '';
+  
+  // Escape special markdown characters
+  const escapeMarkdown = (text) => {
+    if (!text) return '-';
+    return String(text).replace(/[_*[\]()~`>#+\-=|{}.!]/g, '\\$&');
+  };
+  
+  const message = 
+`${actionIcon} *CLIENT ${actionText} - RAM*
 
-👤 *Nama:* ${clientData.nama}
-🏭 *Perusahaan:* ${clientData.nama}
-🗑️ *Kategori:* ${clientData.kategori}
-📍 *Lokasi:* ${clientData.lokasi}
-💰 *Harga:* ${clientData.harga}
-📦 *Volume:* ${clientData.volume || '-'}
-📱 *Kontak:* ${clientData.kontak || '-'}
-👨‍ *PIC:* ${clientData.pic || '-'}
-📊 *Status:* ${clientData.status}
-📅 *Tanggal:* ${clientData.tanggal || new Date().toISOString().split('T')[0]}
+*Nama:* ${escapeMarkdown(clientData.nama)}
+*Kategori:* ${escapeMarkdown(clientData.kategori)}
+*Lokasi:* ${escapeMarkdown(clientData.lokasi)}
+*Harga:* ${escapeMarkdown(clientData.harga)}
+*Volume:* ${escapeMarkdown(clientData.volume)}
+*Kontak:* ${escapeMarkdown(clientData.kontak)}
+*PIC:* ${escapeMarkdown(clientData.pic)}
+*Status:* ${escapeMarkdown(clientData.status)}
+*Tanggal:* ${escapeMarkdown(clientData.tanggal || new Date().toISOString().split('T')[0])}
 
-📝 *Catatan:*
-${clientData.catatan || '-'}
+*Catatan:*
+${escapeMarkdown(clientData.catatan)}
 
-👤 *Ditambahkan oleh:* ${clientData.createdByName}
+*Ditambahkan oleh:* ${escapeMarkdown(clientData.createdByName)}
 
-🔗 *Lokasi di Maps:* ${clientData.maps || 'Tidak ada'}
-  `.trim();
+*Maps:* ${clientData.maps || '-'}`;
+
+  addTelegramLog(`Mengirim notif ${isEdit ? 'EDIT' : 'BARU'} untuk: ${clientData.nama}`, 'info');
   
   try {
+    // Coba dengan Markdown dulu
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -576,9 +577,34 @@ ${clientData.catatan || '-'}
     });
     
     const data = await response.json();
-    return data.ok;
+    
+    if (data.ok) {
+      addTelegramLog(`✅ Berhasil terkirim ke Telegram`, 'info');
+      return true;
+    } else {
+      addTelegramLog(` Error: ${data.description}`, 'error');
+      
+      // Fallback: kirim tanpa parse_mode jika markdown error
+      if (data.description.includes('can\'t parse')) {
+        addTelegramLog('Mencoba kirim tanpa Markdown...', 'info');
+        const retryResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message.replace(/\\[*_`]/g, '')
+          })
+        });
+        const retryData = await retryResponse.json();
+        if (retryData.ok) {
+          addTelegramLog('✅ Berhasil (tanpa Markdown)', 'info');
+          return true;
+        }
+      }
+      return false;
+    }
   } catch (e) {
-    console.error('Telegram error:', e);
+    addTelegramLog(`❌ Network error: ${e.message}`, 'error');
     return false;
   }
 }
@@ -593,25 +619,42 @@ window.testTelegram = async function() {
   }
   
   showToast('📤 Mengirim test...');
+  addTelegramLog('Test manual dimulai', 'info');
   
   try {
+    // Test 1: Cek token valid
+    const meResponse = await fetch(`https://api.telegram.org/bot${token}/getMe`);
+    const meData = await meResponse.json();
+    
+    if (!meData.ok) {
+      addTelegramLog(`❌ Token tidak valid: ${meData.description}`, 'error');
+      showToast('❌ Token tidak valid');
+      return;
+    }
+    
+    addTelegramLog(`✅ Bot valid: @${meData.result.username}`, 'info');
+    
+    // Test 2: Kirim pesan
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: chatId,
-        text: '✅ *Test Berhasil!*\n\n🎉 Notifikasi dari *RAM App* berfungsi dengan baik.\n\n_Sistem siap digunakan._',
+        text: `✅ *Test Berhasil!*\n\n🎉 Notifikasi dari *RAM App* berfungsi.\n\n ${new Date().toLocaleString('id-ID')}\n_Bot: @${meData.result.username}_`,
         parse_mode: 'Markdown'
       })
     });
     
     const data = await response.json();
     if (data.ok) {
-      showToast('✅ Test berhasil! Cek Telegram Anda');
+      addTelegramLog('✅ Test pesan terkirim', 'info');
+      showToast('✅ Test berhasil! Cek Telegram');
     } else {
+      addTelegramLog(`❌ Gagal kirim: ${data.description}`, 'error');
       showToast('❌ Gagal: ' + data.description);
     }
   } catch (e) {
+    addTelegramLog(`❌ Error: ${e.message}`, 'error');
     showToast('❌ Error: ' + e.message);
   }
 };
@@ -620,7 +663,7 @@ window.clearTelegramConfig = function() {
   if (confirm('Yakin ingin menghapus konfigurasi Telegram?')) {
     localStorage.removeItem('telegramToken');
     localStorage.removeItem('telegramChatId');
-    showToast('🗑️ Konfigurasi Telegram dihapus');
+    showToast('🗑️ Konfigurasi dihapus. Reload untuk reset.');
     loadSettings();
   }
 };
@@ -628,7 +671,7 @@ window.clearTelegramConfig = function() {
 // ===== AUTH =====
 window.toggleRegister = function() {
   isRegisterMode = !isRegisterMode;
-  document.getElementById('loginBtn').textContent = isRegisterMode ? '📝 Daftar' : '🔐 Masuk';
+  document.getElementById('loginBtn').textContent = isRegisterMode ? ' Daftar' : '🔐 Masuk';
   document.getElementById('toggleText').textContent = isRegisterMode ? 'Sudah punya akun?' : 'Belum punya akun?';
   document.getElementById('toggleLink').textContent = isRegisterMode ? 'Login di sini' : 'Daftar di sini';
   document.getElementById('loginError').style.display = 'none';
@@ -646,7 +689,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   try {
     if (isRegisterMode) {
       await createUserWithEmailAndPassword(auth, email, password);
-      showToast('✅ Registrasi berhasil! Silakan login.');
+      showToast('✅ Registrasi berhasil!');
       toggleRegister();
     } else {
       await signInWithEmailAndPassword(auth, email, password);
@@ -668,14 +711,14 @@ function translateError(code) {
     'auth/invalid-credential': 'Email atau password salah',
     'auth/email-already-in-use': 'Email sudah terdaftar',
     'auth/weak-password': 'Password minimal 6 karakter',
-    'auth/too-many-requests': 'Terlalu banyak percobaan, coba lagi nanti',
-    'auth/network-request-failed': 'Gagal koneksi, periksa internet'
+    'auth/too-many-requests': 'Terlalu banyak percobaan',
+    'auth/network-request-failed': 'Gagal koneksi'
   };
-  return map[code] || 'Terjadi kesalahan: ' + code;
+  return map[code] || 'Error: ' + code;
 }
 
 window.logout = async function() {
-  if (!confirm('Yakin ingin logout?')) return;
+  if (!confirm('Yakin logout?')) return;
   await signOut(auth);
 };
 
@@ -705,7 +748,7 @@ function loadClients() {
     renderAll();
   }, (err) => {
     console.error(err);
-    showToast('❌ Gagal memuat data: ' + err.message);
+    showToast('❌ Gagal memuat data');
   });
 }
 
@@ -729,8 +772,11 @@ window.previewFoto = function(e) {
 document.getElementById('clientForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!currentUser) return;
+  
   const editId = document.getElementById('editId').value;
   const fotoPrev = document.getElementById('fotoPreview');
+  const btnSubmit = document.getElementById('btnSubmit');
+  
   const data = {
     nama: document.getElementById('nama').value,
     kategori: document.getElementById('kategori').value,
@@ -749,26 +795,41 @@ document.getElementById('clientForm').addEventListener('submit', async (e) => {
     updatedAt: serverTimestamp()
   };
 
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = '⏳ Menyimpan...';
+
   try {
     if (editId) {
+      // UPDATE - kirim notif EDIT
       await updateDoc(doc(db, 'clients', editId), data);
       showToast('✅ Data diupdate');
+      
+      const sent = await sendTelegramNotification({ ...data, id: editId }, true);
+      if (sent) {
+        showToast('📤 Notif EDIT terkirim ke Telegram');
+      } else {
+        showToast('⚠️ Data tersimpan, notif Telegram gagal');
+      }
     } else {
+      // CREATE - kirim notif BARU
       data.createdAt = serverTimestamp();
       const docRef = await addDoc(collection(db, 'clients'), data);
       showToast('✅ Client ditambahkan');
       
-      const sent = await sendTelegramNotification({ ...data, id: docRef.id });
+      const sent = await sendTelegramNotification({ ...data, id: docRef.id }, false);
       if (sent) {
-        showToast('📤 Notifikasi Telegram terkirim');
+        showToast('📤 Notif BARU terkirim ke Telegram');
       } else {
-        showToast('⚠️ Client tersimpan, tapi gagal kirim Telegram');
+        showToast('⚠️ Client tersimpan, notif Telegram gagal');
       }
     }
     resetForm();
     showSection('list', document.querySelectorAll('.tab')[2]);
   } catch (err) {
     showToast('❌ Gagal: ' + err.message);
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = '💾 Simpan & Kirim Notifikasi';
   }
 });
 
@@ -778,7 +839,7 @@ window.resetForm = function() {
   document.getElementById('fotoPreview').style.display = 'none';
   document.getElementById('formTitle').textContent = '➕ Tambah Client Baru';
   document.getElementById('locationInfo').classList.remove('show');
-  document.getElementById('btnGetLocation').textContent = '📍 Ambil Lokasi GPS Saat Ini';
+  document.getElementById('btnGetLocation').textContent = '📍 Ambil Lokasi GPS';
   currentLocation = null;
 };
 
@@ -802,16 +863,17 @@ window.editClient = function(id) {
     img.src = c.foto; img.style.display = 'block';
   }
   document.getElementById('formTitle').textContent = '✏️ Edit Client';
+  document.getElementById('btnSubmit').textContent = '💾 Update & Kirim Notif Edit';
   showSection('add', document.querySelectorAll('.tab')[1]);
 };
 
 window.deleteClient = async function(id) {
-  if (!confirm('Yakin hapus client ini?')) return;
+  if (!confirm('Yakin hapus?')) return;
   try {
     await deleteDoc(doc(db, 'clients', id));
     showToast('🗑️ Client dihapus');
   } catch (err) {
-    showToast('❌ Gagal hapus: ' + err.message);
+    showToast('❌ Gagal: ' + err.message);
   }
 };
 
@@ -831,7 +893,7 @@ window.showDetail = function(id) {
     <p><b>PIC:</b> ${c.pic || '-'}</p>
     <p><b>Tanggal Survey:</b> ${c.tanggal || '-'}</p>
     <p><b>Catatan:</b> ${c.catatan || '-'}</p>
-    <p class="created-by">Ditambahkan oleh: ${c.createdByName || c.createdBy || '-'}</p>
+    <p class="created-by">Oleh: ${c.createdByName || c.createdBy || '-'}</p>
   `;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalDetail').classList.add('show');
@@ -862,7 +924,7 @@ function renderDashboard() {
   `;
   const recent = clients.slice(0, 5);
   if (recent.length === 0) {
-    document.getElementById('recentClients').innerHTML = '<p class="empty">Belum ada data client</p>';
+    document.getElementById('recentClients').innerHTML = '<p class="empty">Belum ada data</p>';
   } else {
     document.getElementById('recentClients').innerHTML = recent.map(c => `
       <div style="padding:10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
@@ -888,7 +950,7 @@ function renderList() {
   });
   const grid = document.getElementById('clientGrid');
   if (filtered.length === 0) {
-    grid.innerHTML = '<p class="empty" style="grid-column:1/-1;">Tidak ada data client</p>';
+    grid.innerHTML = '<p class="empty" style="grid-column:1/-1;">Tidak ada data</p>';
     return;
   }
   grid.innerHTML = filtered.map(c => `
@@ -939,13 +1001,14 @@ function loadSettings() {
   const statusEl = document.getElementById('telegramStatus');
   if (token && chatId) {
     statusEl.className = 'telegram-status connected';
-    statusEl.innerHTML = '✅ Telegram terhubung dan siap mengirim notifikasi';
+    statusEl.innerHTML = '✅ Telegram terhubung';
   } else {
     statusEl.className = 'telegram-status disconnected';
-    statusEl.innerHTML = '❌ Telegram belum dikonfigurasi';
+    statusEl.innerHTML = '❌ Belum dikonfigurasi';
   }
   
   updateSyncStatus();
+  renderTelegramLog();
 }
 
 window.exportCSV = function() {
@@ -959,7 +1022,7 @@ window.exportCSV = function() {
   a.href = URL.createObjectURL(blob);
   a.download = `RAM_client_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
-  showToast('📥 CSV berhasil didownload');
+  showToast('📥 CSV didownload');
 };
 
 window.saveScriptUrl = function() {
@@ -991,9 +1054,9 @@ window.pushToSheets = async function() {
       headers: {'Content-Type':'text/plain;charset=utf-8'},
       body: JSON.stringify({action:'push', data: clients})
     });
-    showToast('⬆️ Data berhasil diupload ke Sheets');
+    showToast('⬆️ Data diupload ke Sheets');
   } catch (e) {
-    showToast('❌ Gagal upload: ' + e.message);
+    showToast('❌ Gagal: ' + e.message);
   }
 };
 
